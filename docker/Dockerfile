@@ -1,13 +1,17 @@
-FROM openjdk:15-slim AS dev
+FROM openjdk:16-slim AS dev
 
-ENV PATH /root/.sdkman/candidates/kotlin/current/bin:$PATH
+ENV PATH /usr/local/kotlinc/bin:$PATH
 ENV SRC /usr/local/src
+ENV VERSION 1.4.10
 
 RUN apt-get update && \
-    apt-get install -y \
-    git unzip zip curl && \
-    curl -s https://get.sdkman.io | bash
-RUN /bin/bash -l -c "chmod a+x $HOME/.sdkman/bin/sdkman-init.sh;$HOME/.sdkman/bin/sdkman-init.sh;sdk install kotlin"
+    apt-get install -y --no-install-recommends \
+    wget unzip && \
+    wget https://github.com/JetBrains/kotlin/releases/download/v$VERSION/kotlin-compiler-$VERSION.zip && \
+    unzip kotlin-compiler-$VERSION.zip -d /usr/local && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm kotlin-compiler-$VERSION.zip
 
 CMD ["/bin/bash"]
 

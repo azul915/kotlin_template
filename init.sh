@@ -17,4 +17,4 @@ docker-compose exec jdk /bin/sh -c 'cd /usr/local/kotlin && \
 gradle init --dsl=kotlin --package=sandbox --project-name=sandbox --type=kotlin-application'
 
 echo -e 'gradlew run'
-docker-compose exec jdk /bin/sh -c 'cd /usr/local/kotlin && ./gradlew run'
+docker-compose exec jdk /bin/sh -c 'cd /usr/local/kotlin && ./gradlew run --exclude-task compileTestJava test javadoc'

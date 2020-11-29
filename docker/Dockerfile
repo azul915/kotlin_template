@@ -1,7 +1,7 @@
 FROM openjdk:16-slim AS dev
 
 # ENV PATH /usr/local/kotlinc/bin:$PATH
-ENV SRC /usr/local/src
+ENV SRC /usr/local/kotlin
 # ENV VERSION 1.4.10
 ENV GRADLE_VERSION 6.7.1
 ENV PATH /usr/local/gradle-$GRADLE_VERSION/bin:$PATH
@@ -24,6 +24,6 @@ CMD ["/bin/sh", "-c", "$JAVA_HOME/bin/java -jar $SRC/main.jar"]
 
 
 FROM adoptopenjdk/openjdk11:alpine-slim AS exe
-ENV SRC /usr/local/src
+ENV SRC /usr/local/kotlin
 COPY --from=builder $SRC/main.jar $SRC/main.jar
 CMD ["/bin/sh", "-c", "$JAVA_HOME/bin/java -jar $SRC/main.jar"]

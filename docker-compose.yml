@@ -8,5 +8,5 @@ services:
     working_dir: /usr/local
     tty: true
     volumes:
-      - ./src:/usr/local/src
+      - ./kotlin:/usr/local/kotlin
       - ./build.sh:/usr/local/build.sh

@@ -6,7 +6,17 @@ cd $current
 echo -e 'docker-compose down -v'
 docker-compose down -v
 
-rm -rf docker-compose.yml && rm -rf ./kotlin && rm -rf ./docker
+echo -e 'Cleaning...'
+if [[ -e docker-compose.yml ]]; then
+  rm docker-compose.yml
+fi
+if [[ -e ./kotlin ]]; then
+  rm -rf ./kotlin
+fi
+if [[ -e ./docker ]]; then
+  rm -rf ./docker
+fi
+
 mkdir ./kotlin
 
 cat <<'EOF' > kt-app.dockerfile
